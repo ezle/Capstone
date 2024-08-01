@@ -1,0 +1,64 @@
+.navbar {
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    color: #343a40;
+}
+
+.navbar-brand:hover {
+    color: #007bff;
+}
+
+.nav-link {
+    color: #495057;
+}
+
+.nav-link.active {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #0056b3;
+}
+
+.nav-item:nth-child(1) .nav-link {
+    color: #dc3545;
+}
+
+.nav-item:nth-child(2) .nav-link {
+    color: #28a745;
+}
+
+.nav-item:nth-child(3) .nav-link {
+    color: #17a2b8;
+}
+
+.nav-item:nth-child(4) .nav-link {
+    color: #ffc107;
+}
+
+.nav-item:nth-child(5) .nav-link {
+    color: #6f42c1;
+}
+
+.nav-item:nth-child(1) .nav-link:hover {
+    color: #c82333;
+}
+
+.nav-item:nth-child(2) .nav-link:hover {
+    color: #218838;
+}
+
+.nav-item:nth-child(3) .nav-link:hover {
+    color: #117a8b;
+}
+
+.nav-item:nth-child(4) .nav-link:hover {
+    color: #e0a800;
+}
+
+.nav-item:nth-child(5) .nav-link:hover {
+    color: #5a2a8b;
+}
