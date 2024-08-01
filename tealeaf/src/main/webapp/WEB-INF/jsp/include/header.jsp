@@ -40,6 +40,7 @@
                         <li><a class="dropdown-item" href="/admin/product">Products</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
+
                     </ul>
                 </li>
                 <li class="nav-item">
