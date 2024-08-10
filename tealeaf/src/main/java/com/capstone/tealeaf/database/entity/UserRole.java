@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Table(name = "user_role")
+@Table(name = "user_roles")
 
 public class UserRole {
 
@@ -23,7 +23,7 @@ public class UserRole {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", insertable=false, updatable=false)
     private Integer userId;
 
     @Column(name = "role_name")
@@ -31,6 +31,6 @@ public class UserRole {
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "user_id") private User user;
+    @JoinColumn(name = "user_id") private User user;
 
 }

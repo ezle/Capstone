@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller     // Figures out what HTML file that you need
 @RequestMapping("/admin")
 public class AdminController {
-
+// what are you doing cray
     @GetMapping("/product")
     public ModelAndView product(){
          ModelAndView response = new ModelAndView("admin/product");

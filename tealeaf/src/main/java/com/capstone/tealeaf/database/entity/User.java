@@ -11,12 +11,10 @@ import java.util.List;
 @Setter
 @Entity     // Spring Boot uses this to show that it's an entity.
 @ToString   // Useful for logging, because it shows the information in a human readable way.
-// log.debug(order.toString()) would print out values
+            // log.debug(order.toString()) would print out values
 @NoArgsConstructor      // Order order = new Order();
 @AllArgsConstructor     // Order-order = new Order(user_id, order_date);
-
 @Table(name = "users")
-
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,5 +32,10 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)      // Take everything that relied on it with it, null spaces, removing data entirely from the database
     private List<Order> orders;
+
+    @ToString.Exclude                       // EAGER - grabs all the data
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)      // Take everything that relied on it with it, null spaces, removing data entirely from the database
+    private List<UserRole> userRoles;
 
 }

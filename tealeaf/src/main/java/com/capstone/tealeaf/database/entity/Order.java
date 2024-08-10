@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,8 +25,15 @@ public class Order {
     @Column(name = "id")    // Links column with variable on line below.
     private Integer id;     // Encapsulation - Your code doesn't get messed up on accident
 
-    @Column(name = "order_date", columnDefinition = "DATE") // Column Definition for when the sql datatype is weird. (Datetime, Text etc.)
+    @Column(name="user_id", insertable = false, updatable = false)
+    private Integer userId;
+
+    @Column(name = "order_date") // Column Definition for when the sql datatype is weird. (Datetime, Text etc.)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
+
+    @Column(name="status")
+    private Integer status;
 
     // Where the chicken feet are is the "@ManyToOne", and the two straight lines are "@OneToMany"
     @ToString.Exclude
@@ -33,6 +41,9 @@ public class Order {
         @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
-    @Column(name="user_id", insertable = false, updatable = false)
-    private Integer userId;
+    @ToString.Exclude                       // EAGER - grabs all the data
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)      // Take everything that relied on it with it, null spaces, removing data entirely from the database
+    private List<OrderDetail> OrderDetails;
+
 }
