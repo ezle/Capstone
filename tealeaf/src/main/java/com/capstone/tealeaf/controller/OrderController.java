@@ -33,7 +33,10 @@ public class OrderController {
 
 //    @GetMapping("/order/addToCart")
 //    public ModelAndView addToCart(@RequestParam Integer productId){
-//        ModelAndView response = new ModelAndView();
+//        ModelAndView response = new ModelAndView("order/orderdetail");
+
+//        List<Map<String,Object>> orderDetails = orderDAO.getOrderDetails(orderId);
+//        response.addObject("orderDetails", orderDetails);
 //
 //        Product product = productDAO.findById(productId);
 //        User user = authenticatedUserUtilities.getCurrentUser();
