@@ -39,7 +39,7 @@ public class SpringSecurity {
         // the loginProcessingUrl is the URL that the form will submit to
         http.formLogin(formLogin -> formLogin
                 // this a controller method URL for displaying the login page
-                .loginPage("/account/loginPageUrl")
+                .loginPage("/account/login")
                 // this URL is part of spring security and we do not need to implement it in our controller
                 // we just need to make the form action submit to this URL
 
@@ -48,7 +48,7 @@ public class SpringSecurity {
                 // 1) action needs to be set to /account/loginProcessingURL
                 // 2) input field for username needs to be named "username"
                 // 3) input field for password needs to be named "password"
-                .loginProcessingUrl("/account/loginProcessingURL"));
+                .loginProcessingUrl("/account/login"));
 
         // this is the URL that will log a user out
         http.logout(formLogout -> formLogout

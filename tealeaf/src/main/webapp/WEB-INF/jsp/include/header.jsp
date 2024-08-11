@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,27 +33,45 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/menu">Menu</a>
                 </li>
+                <sec:authorize access="!isAuthenticated()">
                 <li class="nav-item">
-                    <a class="nav-link" href="/account/create">Sign Up</a>
+                    <a class="nav-link" href="/account/sign-up">Sign Up</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/login">Log In</a>
+                </li>
+                </sec:authorize>
+
+                <sec:authorize access="isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login/logout">Log Out</a>
+                    </li>
+                    <li class="nav-item" id="username_email" >
+                        <sec:authentication property="name"/>
+                    </li>
+
+                </sec:authorize>
+
 <%--                <li class="nav-item">--%>
 <%--                    <a class="nav-link" href="/product">Product</a>--%>
 <%--                </li>--%>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Admin
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Orders</a></li>
-                        <li><a class="dropdown-item" href="/admin/product">Products</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <sec:authorize access="hasAuthority('ADMIN')">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Orders</a></li>
+                            <li><a class="dropdown-item" href="/admin/product">Products</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
 
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
+                        </ul>
+                    </li>
+                </sec:authorize>
+<%--                <li class="nav-item">--%>
+<%--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--%>
+<%--                </li>--%>
             </ul>
 <%--            <form class="d-flex">--%>
 <%--                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>

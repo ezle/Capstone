@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j              //Used for logging. Essentially a fancy System.Out.Println
@@ -32,7 +33,7 @@ public class AccountController {
     @Autowired
     private AuthenticatedUserUtilities authenticatedUserUtilities;
 
-    @GetMapping("/create")
+    @GetMapping("/sign-up")
     public ModelAndView createAccount() {
         ModelAndView response = new ModelAndView("auth/signup");
 
@@ -53,5 +54,24 @@ public class AccountController {
         return response;
 
     }
+
+    // Login
+
+    @GetMapping("/login")
+    public ModelAndView login(@RequestParam(required = false) String error){
+        ModelAndView response = new ModelAndView("auth/login");
+
+        return response;
+
+    }
+
+    @PostMapping("/login")
+    public ModelAndView loginSubmit(){
+        ModelAndView response = new ModelAndView("auth/login");
+        response.setViewName("redirect:/");
+        return response;
+
+    }
+
 
 }

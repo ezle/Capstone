@@ -1,6 +1,7 @@
 package com.capstone.tealeaf.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j              //Used for logging. Essentially a fancy System.Out.Println
 @Controller     // Figures out what HTML file that you need
 @RequestMapping("/admin")
+@PreAuthorize("hasAnyAuthority('ADMIN')")
 public class AdminController {
 // what are you doing cray
     @GetMapping("/product")
