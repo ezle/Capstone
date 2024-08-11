@@ -1,6 +1,15 @@
 <jsp:include page="../include/header.jsp" />
 
-<h1>class="page-title">This is a create product page</h1>
+
+
+<c:choose>
+    <c:when test="${empty form.id}">
+        <h1>class="page-title">Create Product</h1>
+    </c:when>
+    <c:otherwise>
+        <h1>class="page-title">Edit Product</h1>
+    </c:otherwise>
+</c:choose>
 
 <div class="container">
     <form action="/product/createSubmit">
