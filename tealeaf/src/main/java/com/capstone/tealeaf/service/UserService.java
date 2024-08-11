@@ -1,10 +1,13 @@
 package com.capstone.tealeaf.service;
 
 import com.capstone.tealeaf.database.dao.UserDAO;
+import com.capstone.tealeaf.database.entity.User;
+import com.capstone.tealeaf.form.CreateAccountFormBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 @Slf4j
 @Service
@@ -14,7 +17,7 @@ public class UserService {
     private UserDAO userDao;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder; // elton sucks!
 
 
     public User createUser(CreateAccountFormBean form) {
@@ -28,7 +31,7 @@ public class UserService {
         user.setPassword(encryptedPassword);
 
 
-        user.setCreateDate(new Date());
+
 
         // save the user to the database
         userDao.save(user);

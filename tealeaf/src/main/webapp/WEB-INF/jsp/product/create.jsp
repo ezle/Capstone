@@ -2,8 +2,8 @@
 
 <h1>class="page-title">This is a create product page</h1>
 
-<div class="container"></div>
-<form>
+<div class="container">
+    <form action="/product/createSubmit">
 
         <div class="row pt-5">
             <div class="col-6">
@@ -49,5 +49,7 @@
 
     </form>
 </div>
+</div>
+
 
 <jsp:include page="../include/footer.jsp"/>
