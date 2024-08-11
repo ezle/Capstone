@@ -3,11 +3,16 @@ package com.capstone.tealeaf.security;
 
 import com.capstone.tealeaf.database.dao.UserDAO;
 import com.capstone.tealeaf.database.entity.User;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -43,5 +48,6 @@ public class AuthenticatedUserUtilities {
         }
         return userDAO.findByEmailIgnoreCase(username);
     }
+
 
 }
