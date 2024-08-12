@@ -10,10 +10,13 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Component;
+
+import java.util.Collection;
 
 @Slf4j
 @Component
@@ -61,4 +64,17 @@ public class AuthenticatedUserUtilities {
         session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
     }
 
+    public boolean isUserInRole(String role) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        if (context != null && context.getAuthentication() != null) {
+            Collection<? extends GrantedAuthority> authorities = context.getAuthentication().getAuthorities();
+            for (GrantedAuthority authority : authorities) {
+                if (authority.getAuthority().equals(role)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }

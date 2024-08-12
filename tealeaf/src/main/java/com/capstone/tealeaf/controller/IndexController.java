@@ -13,6 +13,7 @@ public class IndexController {
     @GetMapping("/")
     public ModelAndView home() {
         ModelAndView response = new ModelAndView("home");
+
         return response;
     }
 }
