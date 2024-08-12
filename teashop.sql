@@ -13,4 +13,3 @@ SELECT name, price FROM products;
 INSERT INTO products (name, price) VALUES ("BayTea", 5.0), ("AmbTea", 5.0);
 
 SELECT * FROM orders;
-JOIN on CARTS

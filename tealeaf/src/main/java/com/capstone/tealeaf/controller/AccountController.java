@@ -6,10 +6,13 @@ import com.capstone.tealeaf.database.entity.User;
 import com.capstone.tealeaf.form.CreateAccountFormBean;
 import com.capstone.tealeaf.security.AuthenticatedUserUtilities;
 import com.capstone.tealeaf.service.UserService;
-import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,9 +45,28 @@ public class AccountController {
     }
 
     @PostMapping("/sign-up")
-    public ModelAndView signUpSubmit(CreateAccountFormBean form, HttpSession session){
+    public ModelAndView signUpSubmit(@Valid CreateAccountFormBean form, BindingResult bindingResult){
         ModelAndView response = new ModelAndView("auth/signup");
-        response.addObject("form", form);
+
+        if (bindingResult.hasErrors()) {
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                log.debug("Validation error : " + ((FieldError) error).getField() + " = " + error.getDefaultMessage());
+            }
+
+            response.addObject("bindingResult", bindingResult);
+
+            response.addObject("form", form);
+
+            return response;
+
+        } else {
+
+            User user = userService.createUser(form);
+//            authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
+            response.setViewName("redirect:/");
+
+
+        }
 
         // save the user to the database
         User user = userService.createUser(form);

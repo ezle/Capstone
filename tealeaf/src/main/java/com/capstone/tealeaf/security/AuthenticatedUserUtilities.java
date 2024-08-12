@@ -22,6 +22,9 @@ public class AuthenticatedUserUtilities {
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     public String getCurrentUsername() {
         // the goal of this method is to either return the logged in username or null if the user is not logged in
         SecurityContext context = SecurityContextHolder.getContext();
@@ -49,5 +52,13 @@ public class AuthenticatedUserUtilities {
         return userDAO.findByEmailIgnoreCase(username);
     }
 
+    public void manualAuthentication(HttpSession session, String username, String unencryptedPassword) {
+        // reset security principal to be the new user information
+        Authentication request = new UsernamePasswordAuthenticationToken(username, unencryptedPassword);
+        Authentication result = authenticationManager.authenticate(request);
+        SecurityContext sc = SecurityContextHolder.getContext();
+        sc.setAuthentication(result);
+        session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
+    }
 
 }

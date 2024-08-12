@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/header.jsp" />
 
 
@@ -19,12 +20,17 @@
 <%--                                    <label class="form-label" for="form3Example1cg">Your Name</label>--%>
 <%--                                </div>--%>
 
-                                <div data-mdb-input-init class="form-outline mb-4">
+                                <div class="form-outline mb-4">
                                     <input type="email" id="email" name="email" value="${form.email}" class="form-control form-control-lg" />
                                     <label class="form-label" for="email">Your Email</label>
+                                    <c:if test="${bindingResult.hasFieldErrors('email')}">
+                                        <c:forEach items="${bindingResult.getFieldErrors('email')}" var="error">
+                                            <div class="text-danger">${error.defaultMessage}</div>
+                                        </c:forEach>
+                                    </c:if>
                                 </div>
 
-                                <div data-mdb-input-init class="form-outline mb-4">
+                                <div class="form-outline mb-4">
                                     <input type="password" id="password" name="password" value="${form.password}" class= "form-control form-control-lg"/>
                                     <label class="form-label" for="password">Password</label>
                                 </div>
@@ -34,16 +40,16 @@
 <%--                                    <label class="form-label" for="form3Example4cdg">Repeat your password</label>--%>
 <%--                                </div>--%>
 
-                                <div class="form-check d-flex justify-content-center mb-5">
-                                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                                    <label class="form-check-label" for="form2Example3cg">
-                                        I agree to the <a href="#!" class="text-body"><u>Terms of service</u></a>
-                                    </label>
-                                </div>
+<%--                                <div class="form-check d-flex justify-content-center mb-5">--%>
+<%--                                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />--%>
+<%--                                    <label class="form-check-label" for="form2Example3cg">--%>
+<%--                                        I agree to the <a href="#!" class="text-body"><u>Terms of service</u></a>--%>
+<%--                                    </label>--%>
+<%--                                </div>--%>
 
                                 <div class="d-flex justify-content-center">
-                                    <button  type="submit" data-mdb-button-init
-                                             data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                                    <button  type="submit"
+                                              class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                                 </div>
 
                                 <p class="text-center text-muted mt-5 mb-0">Already have an account? <a href="/login"
