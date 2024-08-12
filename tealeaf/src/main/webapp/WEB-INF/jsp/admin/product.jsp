@@ -23,7 +23,7 @@
 </style>
 
 <section class="container">
-    <a href="">
+    <a href="/admin/create-product" class="btn btn-primary">Create Product</a>
 </section>
 <section class="container" style="background-color: lavenderblush">
     <table class="table admin-table" style="background-color: lightgoldenrodyellow";>

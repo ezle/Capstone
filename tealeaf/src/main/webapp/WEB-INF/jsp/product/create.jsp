@@ -12,40 +12,40 @@
 </c:choose>
 
 <div class="container">
-    <form action="/product/createSubmit">
+    <form action="/product/create-submit" method="post">
 
         <div class="row pt-5">
             <div class="col-6">
-                <div class="mb-3">  //Margin Bottom
-                    <label for="exampleInputName" class="form-label">Name</label>
-                    <input type="text" name="name" class="form-control" id="exampleInputName">
+                <div class="mb-3">  <!-- Margin Bottom -->
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" class="form-control" value="${form.name}" id="name" >
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-6">
-                <div class="mb-3">  //Margin Bottom
-                    <label for="exampleInputDescription" class="form-label">Description</label>
-                    <input type="text" name="description" class="form-control" id="exampleInputDescription">
+                <div class="mb-3">  <!-- Margin Bottom -->
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" name="description" class="form-control" value="${form.description}" id="description">
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-6">
-                <div class="mb-3">  //Margin Bottom
-                    <label for="exampleInputPrice" class="form-label">Price</label>
-                    <input type="text" name="price" class="form-control" id="exampleInputPrice">
+                <div class="mb-3">  <!-- Margin Bottom -->
+                    <label for="price" class="form-label">Price</label>
+                    <input type="text" name="price" class="form-control" value="${form.price}" id="price">
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-6">
-                <div class="mb-3">  // MB = Margin Bottom
-                    <label for="exampleInputImageURL" class="form-label">Image URL</label>
-                    <input type="text" name="imageUrl"class="form-control" id="exampleInputImageURL">
+                <div class="mb-3">  <!-- Margin Bottom -->
+                    <label for="imageUrl" class="form-label">Image URL</label>
+                    <input type="text" name="imageUrl"class="form-control" id="imageURL" value="${form.imageUrl}">
                 </div>
             </div>
         </div>
