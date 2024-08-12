@@ -40,7 +40,7 @@ public class AdminController {
 
     @GetMapping("/create-product")
     public ModelAndView create(){
-        ModelAndView response = new ModelAndView("product/create");
+        ModelAndView response = new ModelAndView("admin/create");
 
 
         return response;
@@ -48,7 +48,7 @@ public class AdminController {
 
     @PostMapping("/create-product")
     public ModelAndView productSubmit(CreateProductFormBean form) {
-        ModelAndView response = new ModelAndView("admin/create-product");
+        ModelAndView response = new ModelAndView("admin/create");
 
         response.addObject("form", form);
 

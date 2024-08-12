@@ -4,15 +4,15 @@
 
 <c:choose>
     <c:when test="${empty form.id}">
-        <h1>class="page-title">Create Product</h1>
+        <h1 class="page-title">Create Product</h1>
     </c:when>
     <c:otherwise>
-        <h1>class="page-title">Edit Product</h1>
+        <h1 class="page-title">Edit Product</h1>
     </c:otherwise>
 </c:choose>
 
 <div class="container">
-    <form action="/product/create-submit" method="post">
+    <form action="/admin/create-product" method="post">
 
         <div class="row pt-5">
             <div class="col-6">
