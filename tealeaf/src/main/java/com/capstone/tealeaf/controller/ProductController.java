@@ -82,4 +82,21 @@ public class ProductController {
 
         return response;
     }
+
+    @GetMapping("/product/{productId}/edit")
+    public ModelAndView editProduct(@PathVariable Integer productId) {
+        ModelAndView response = new ModelAndView("admin/create");
+        log.info("productId: "+ productId);
+        Product product = productDAO.findById(productId);
+        CreateProductFormBean form= new CreateProductFormBean();
+        form.setId(product.getId());
+        form.setName(product.getName());
+        form.setDescription(product.getDescription());
+        form.setPrice(product.getPrice());
+        form.setImageUrl(product.getImageUrl());
+        response.addObject("form", form);
+        return response;
+    }
+
+
 }

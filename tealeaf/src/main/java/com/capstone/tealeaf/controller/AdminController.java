@@ -65,7 +65,7 @@ public class AdminController {
 
         log.debug(product.toString());
         productDAO.save(product);
-//        response.setViewName("admin/product");
+        response.setViewName("redirect:/menu");
 
         return response;
     }
