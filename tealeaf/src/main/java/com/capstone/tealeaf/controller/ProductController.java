@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DecimalFormat;
@@ -19,6 +21,21 @@ public class ProductController {
 
     @Autowired  //Bring in productDAO into said product controller
     private ProductDAO productDAO;
+
+    @PostMapping("/search")
+    public ModelAndView search(@RequestParam(required = false) String searchTerm) {
+        ModelAndView response = new ModelAndView("product/menu");
+        log.info("searchTerm: "+ searchTerm);
+
+        List<Product> products = productDAO.findByNameLike(searchTerm);    // Finds and returns a list of all products.
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        response.addObject("df", df);
+
+        response.addObject("products", products);    // Send the products into your JSP page.
+
+        return response;
+    }
 
     @GetMapping("/menu")    // Sets the URL that the page is listening for. Once "/location" is added to the end of the URL, this function will run
     public ModelAndView menu() {

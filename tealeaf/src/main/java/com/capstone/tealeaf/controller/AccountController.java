@@ -6,6 +6,7 @@ import com.capstone.tealeaf.database.entity.User;
 import com.capstone.tealeaf.form.CreateAccountFormBean;
 import com.capstone.tealeaf.security.AuthenticatedUserUtilities;
 import com.capstone.tealeaf.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class AccountController {
     }
 
     @PostMapping("/sign-up")
-    public ModelAndView signUpSubmit(@Valid CreateAccountFormBean form, BindingResult bindingResult){
+    public ModelAndView signUpSubmit(@Valid CreateAccountFormBean form, BindingResult bindingResult, HttpSession session){
         ModelAndView response = new ModelAndView("auth/signup");
 
         if (bindingResult.hasErrors()) {
@@ -60,17 +61,13 @@ public class AccountController {
             return response;
 
         } else {
-
+            // save the user to the database
             User user = userService.createUser(form);
-//            authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
+            authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
             response.setViewName("redirect:/");
 
 
         }
-
-        // save the user to the database
-        User user = userService.createUser(form);
-        response.setViewName("redirect:/");
 
 
         return response;

@@ -2,6 +2,10 @@
 <jsp:include page="../include/header.jsp"/>
 <H1>menu</H1>
 
+<form action="/search" method="post">
+    <input type="text" name="searchTerm"/>
+    <button type="submit">Search</button>
+</form>
 <section class = "container">
     <div class="row">
         <c:forEach items="${products}" var="product">

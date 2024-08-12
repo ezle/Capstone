@@ -21,7 +21,7 @@
 <%--                                </div>--%>
 
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="email" name="email" value="${form.email}" class="form-control form-control-lg" />
+                                    <input type="email" id="email" name="email" value="${form.email}" class="form-control form-control-lg <c:if test="${bindingResult.hasFieldErrors('email')}">is-invalid</c:if>" />
                                     <label class="form-label" for="email">Your Email</label>
                                     <c:if test="${bindingResult.hasFieldErrors('email')}">
                                         <c:forEach items="${bindingResult.getFieldErrors('email')}" var="error">
@@ -31,8 +31,13 @@
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="password" name="password" value="${form.password}" class= "form-control form-control-lg"/>
+                                    <input type="password" id="password" name="password" value="${form.password}" class= "form-control form-control-lg <c:if test="${bindingResult.hasFieldErrors('password')}">is-invalid</c:if>"/>
                                     <label class="form-label" for="password">Password</label>
+                                    <c:if test="${bindingResult.hasFieldErrors('password')}">
+                                        <c:forEach items="${bindingResult.getFieldErrors('password')}" var="error">
+                                            <div class="text-danger">${error.defaultMessage}</div>
+                                        </c:forEach>
+                                    </c:if>
                                 </div>
 
 <%--                                <div data-mdb-input-init class="form-outline mb-4">--%>

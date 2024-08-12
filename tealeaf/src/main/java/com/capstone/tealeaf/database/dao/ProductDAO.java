@@ -17,5 +17,8 @@ public interface ProductDAO extends JpaRepository<Product, Long> {
     // Return empty List if you cannot find the product with said price
     // Returns list of product with said price
 
+    @Query(value ="SELECT * FROM products p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'));", nativeQuery = true)
+    List<Product> findByNameLike(String name); // <-dynamic user from the search term   ^
+
 
 }
