@@ -3,7 +3,7 @@
 <H1>Admin Product</H1>
 <style>
     .admin-table{
-        width: 100%;
+        width: 80%;
         height: auto;
     }
 
@@ -11,26 +11,29 @@
         width: 50px;
     }
     .col-description{
-        width: 200px;
+        width: 500px;
         text-wrap: pretty;
     }
     .col-img {
         width: 100px;
         overflow: hidden;
         text-wrap: pretty;
+        text-overflow: ellipsis;
     }
 </style>
 
-
+<section class="container">
+    <a href="">
+</section>
 <section class="container" style="background-color: lavenderblush">
     <table class="table admin-table" style="background-color: lightgoldenrodyellow";>
         <thead>
         <tr>
             <th scope="col">Id</th>
-            <th scope="col" style="background-color: ligh >Name</th>
+            <th scope="col">Name</th>
             <th scope="col col-description">Description</th>
             <th scope="col">Price</th>
-            <th scope="col col-img">Image URL</th>
+<%--            <th scope="col col-img">Image URL</th>--%>
         </tr>
         </thead>
 
@@ -41,7 +44,7 @@
                     <td>${product.name}</td>
                     <td> ${product.description}</td>
                     <td>${product.price}</td>
-                    <td>${product.imageUrl}</td>
+<%--                    <td>${product.imageUrl}</td>--%>
                 </tr>
             </c:forEach>
         </tbody>
