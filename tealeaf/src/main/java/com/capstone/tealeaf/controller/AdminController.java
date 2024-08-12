@@ -63,7 +63,7 @@ public class AdminController {
         product.setPrice(form.getPrice());
         product.setImageUrl(form.getImageUrl());
 
-        product.
+        log.debug(product.toString());
         productDAO.save(product);
 //        response.setViewName("admin/product");
 
