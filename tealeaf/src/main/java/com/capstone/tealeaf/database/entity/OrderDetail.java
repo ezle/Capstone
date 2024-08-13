@@ -1,11 +1,7 @@
 package com.capstone.tealeaf.database.entity;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter

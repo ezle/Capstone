@@ -33,7 +33,7 @@ public class Order {
     private Date orderDate;
 
     @Column(name="status")
-    private Integer status;
+    private String status;
 
     // Where the chicken feet are is the "@ManyToOne", and the two straight lines are "@OneToMany"
     @ToString.Exclude

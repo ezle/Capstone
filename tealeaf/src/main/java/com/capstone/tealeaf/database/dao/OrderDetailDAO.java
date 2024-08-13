@@ -11,4 +11,7 @@ public interface OrderDetailDAO extends JpaRepository<OrderDetail, Long> {
     List<OrderDetail> findByProductId(Integer productId);
 
     List<OrderDetail> findByOrderId(Integer orderId);
+
+
+    OrderDetail findByOrderIdAndProductId(Integer orderId, Integer productId);
 }

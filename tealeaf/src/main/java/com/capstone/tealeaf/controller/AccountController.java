@@ -1,7 +1,9 @@
 package com.capstone.tealeaf.controller;
 
-import com.capstone.tealeaf.database.dao.UserDAO;
-import com.capstone.tealeaf.database.dao.UserRoleDAO;
+import com.capstone.tealeaf.database.dao.*;
+import com.capstone.tealeaf.database.entity.Order;
+import com.capstone.tealeaf.database.entity.OrderDetail;
+import com.capstone.tealeaf.database.entity.Product;
 import com.capstone.tealeaf.database.entity.User;
 import com.capstone.tealeaf.form.CreateAccountFormBean;
 import com.capstone.tealeaf.security.AuthenticatedUserUtilities;
@@ -20,26 +22,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
+
+
 @Slf4j              //Used for logging. Essentially a fancy System.Out.Println
-@Controller     // Figures out what HTML file that you need
+@Controller         // Figures out what HTML file that you need
 @RequestMapping("/account")
 public class AccountController {
 
     @Autowired
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
     @Autowired
-    UserRoleDAO userRoleDAO;
+    private UserRoleDAO userRoleDAO;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
     private AuthenticatedUserUtilities authenticatedUserUtilities;
 
+    @Autowired
+    private ProductDAO productDAO;
+
+    @Autowired
+    private OrderDAO orderDAO;
+
+    @Autowired
+    private OrderDetailDAO orderDetailDAO;
+
     @GetMapping("/sign-up")
     public ModelAndView createAccount() {
-        ModelAndView response = new ModelAndView("auth/signup");
+        ModelAndView response = new ModelAndView("auth/signup");  //This is a jsp page
 
 
         return response;
@@ -91,6 +105,44 @@ public class AccountController {
         return response;
 
     }
+
+    @GetMapping("/order/addToCart") // URL to link
+    public ModelAndView addToCart(@RequestParam Integer productId){
+        ModelAndView response = new ModelAndView();
+
+        Product product = productDAO.findById(productId);
+        User user = authenticatedUserUtilities.getCurrentUser();
+
+        // Find the order with status "CART" for the current user
+        Order order = orderDAO.findByStatusAndUserId("CART", user.getId());
+        if (order == null) {
+            // If no such order exists, create a new one
+            order = new Order();
+            order.setUser(user);
+            order.setOrderDate(new Date());
+            order.setStatus("CART");
+            orderDAO.save(order);
+        }
+
+        // Check if the product is already in the cart
+        OrderDetail orderDetail = orderDetailDAO.findByOrderIdAndProductId(order.getId(), product.getId());
+        if (orderDetail == null) {
+            // If the product is not in the cart, add it
+            orderDetail = new OrderDetail();
+            orderDetail.setOrder(order); // Linking order detail to the order
+            orderDetail.setProduct(product); // Select product that links to the order
+            orderDetail.setQuantity(1); // Start with a quantity of 1
+            orderDetailDAO.save(orderDetail);
+        } else {
+            // If the product is already in the cart, update the quantity
+            orderDetail.setQuantity(orderDetail.getQuantity() + 1);
+            orderDetailDAO.save(orderDetail);
+        }
+
+        response.setViewName("redirect:/mycart");
+        return response;
+    }
+
 
 
 }

@@ -9,11 +9,11 @@ public interface OrderDAO extends JpaRepository<Order, Long> {
     Order findById(Integer id);
     // Always return 1 or zero "order"
 
-    List<Order> findByStatus(Integer status);
+    List<Order> findByStatus(String status);
     // Bay 2024 - "You have to think..."
 
     List<Order> findByUserId(Integer userId);
 
 
-
+    Order findByStatusAndUserId(String status, Integer userId);
 }
