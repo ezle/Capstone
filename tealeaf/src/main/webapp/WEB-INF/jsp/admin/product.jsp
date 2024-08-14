@@ -31,7 +31,7 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
-            <th scope="col col-description">Description</th>
+            <th scope="col" class="col-description">Description</th>
             <th scope="col">Price</th>
 <%--            <th scope="col col-img">Image URL</th>--%>
         </tr>
@@ -43,7 +43,7 @@
                     <td>${product.id}</td>
                     <td>${product.name}</td>
                     <td> ${product.description}</td>
-                    <td>${product.price}</td>
+                    <td>$${df.format(product.price)}</td>
 <%--                    <td>${product.imageUrl}</td>--%>
                 </tr>
             </c:forEach>

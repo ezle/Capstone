@@ -18,9 +18,9 @@
     <c:forEach items="${orderDetails}" var="orderDetail">
         <tr>
             <td>${orderDetail.product.name}</td>
-            <td>${orderDetail.product.price}</td>
+            <td>$${df.format(orderDetail.product.price)}</td>
             <td>${orderDetail.quantity}</td>
-            <td>${orderDetail.product.price*orderDetail.quantity}</td>
+            <td>$${df.format(orderDetail.product.price*orderDetail.quantity)}</td>
             <td><a href="/removeFromCart?orderDetailId=${orderDetail.id}&orderId=${orderDetail.orderId}" class="btn btn-danger">X</a></td>
         </tr>
     </c:forEach>

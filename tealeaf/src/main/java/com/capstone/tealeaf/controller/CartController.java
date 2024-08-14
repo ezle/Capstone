@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Slf4j                  // Used for logging. Essentially a fancy System.Out.Println
@@ -33,6 +34,9 @@ public class CartController {
     public ModelAndView viewCart() {
         ModelAndView response = new ModelAndView("orders/cart"); // This is file from jsp
         User user = authenticatedUserUtilities.getCurrentUser();
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        response.addObject("df", df);
 
         Order order= orderDAO.findByStatusAndUserId("CART", user.getId());
         List<OrderDetail> orderDetails= orderDetailDAO.findByOrderId(order.getId());

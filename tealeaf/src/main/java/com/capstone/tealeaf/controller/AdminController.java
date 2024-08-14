@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Slf4j              //Used for logging. Essentially a fancy System.Out.Println
@@ -26,6 +27,9 @@ public class AdminController {
     @GetMapping("/product")
     public ModelAndView product(){
          ModelAndView response = new ModelAndView("admin/product");
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        response.addObject("df", df);
 
          List<Product> products = productDAO.findAll();
          response.addObject("products", products);
