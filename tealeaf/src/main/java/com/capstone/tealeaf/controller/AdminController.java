@@ -20,7 +20,6 @@ import java.util.List;
 @RequestMapping("/admin")
 @PreAuthorize("hasAnyAuthority('ADMIN')")
 public class AdminController {
-// what are you doing cray
 
     @Autowired
     private ProductDAO productDAO;
